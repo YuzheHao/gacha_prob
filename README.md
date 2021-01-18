@@ -81,7 +81,7 @@ Then we asked another group of people to do the same thing, but in plain model r
 
 Here is the data we called 10,000 people * 2 groups to do this test:
 
-![exp_result](https://raw.githubusercontent.com/YuzheHao/gacha_prob/main/resource/exp_result.pngg)
+![exp_result](https://raw.githubusercontent.com/YuzheHao/gacha_prob/resource/exp_result.pngg)
 
 The x-value means how many gacha they did for a 6-star, the y-value means how many people are hitting at this moment.
 The deepskyblue line is for plain model, and orange line is for relu model, the limegreen line is where x=50.
