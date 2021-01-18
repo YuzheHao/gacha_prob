@@ -6,6 +6,9 @@ Originally, this is for testing a gacha model, which many people believe the nee
 2. After 49th gachas, each gacha that doesn't hit a 6-star character will make increase this hit probality by 2%, for example, if 50th gacha didn't hit a 6-star, then the hit probablity of 51th gacha will become 4%... if 99th were also hitting no 6-star, the hit prob of 100th will become 100%; 
 3. Every time when hitting a 6-star, the hit prob will get back to 2%, and reset the next gacha as the 1st gacha.
 
+## [People's wrong cognition]
+And based on this calculation, a lot of people like to say "I have 170 gacha chances, and since the **expected gacha times for a 6-star is 34**, I might get 5 6-star characters!" I disagree with this, I believe with 170 chances, the expected 6-star should be around 3, not 5. We should use 50 as our expected time for getting a 6-star rather than 34.
+
 ## [About where the "34" comes from]
 About this number "34", is calculated as "expected value" of this model, which is:
 ```python
@@ -54,9 +57,6 @@ the expected value:  34.59455493520977
 ```
 If we ignore the rounding error, the first value should be 1.0.
 
-## [People's wrong cognition]
-And based on this calculation, a lot of people like to say "I have 170 gacha chances, and since the **expected gacha times for a 6-star is 34**, I might get 5 6-star characters!" I disagree with this, I believe with 170 chances, the expected 6-star should be around 3, not 5. We should use 50 as our expected time for getting a 6-star rather than 34.
-
 ## [Compare with another plain model] 
 If we had a gacha model has constant 2% hitting probablity (which I call "plain model"), it is no doubt we feel the "expected times for hitting a 6-star" is 50 (1/0.02).
 Then we compare this constant model with our model (which I call "relu model", since the prob curve of this model is very similar with relu activating function), we will find in the first 50 gachas, the prob model should be the SAME!
@@ -81,7 +81,7 @@ Then we asked another group of people to do the same thing, but in plain model r
 
 Here is the data we called 10,000 people * 2 groups to do this test:
 
-![exp_result](./resource/exp_result.png)
+![exp_result](https://github.com/YuzheHao/gacha_prob/blob/main/resource/exp_result.pngg)
 
 The x-value means how many gacha they did for a 6-star, the y-value means how many people are hitting at this moment.
 The deepskyblue line is for plain model, and orange line is for relu model, the limegreen line is where x=50.
