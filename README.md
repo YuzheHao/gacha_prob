@@ -1,4 +1,57 @@
-# gacha_prob
+# About this
+Originally, this is for testing a gacha model, which many people believe the needed gacha times for getting a 6-star character is 34. But I felt this number is quite anti-intuitive.
+
+> [Gacha Model]
+> (1) In first 50 times, the probality of hitting a 6-star character (the rarest rank in the pool) is 2%; 
+> (2) After 49th gachas, each gacha that doesn't hit a 6-star character will make increase this hit probality by 2%, for example, if 50th gacha didn't hit a 6-star, then the hit probablity of 51th gacha will become 4%... if 99th were also hitting no 6-star, the hit prob of 100th will become 100%; 
+> (3) Every time when hitting a 6-star, the hit prob will get back to 2%, and reset the next gacha as the 1st gacha.
+
+About this number "34", is calculated as "expected value" of this model, which is:
+```python
+# This is hitting probablity of Nth hitting (following the gacha model)
+def current_hit_prob(Nth):
+	if Nth<=50 and Nth>0:
+		return 0.02
+	elif Nth>50 and Nth<=100:
+		return 0.02 + 0.02*(Nth-50)
+	else:
+		print('ERROR, an invalid input.')
+
+# This is the probablity of event "hit at Nth gacha", which contains two parts: "in former (N-1)th gacha, you hit nothing" and "you hit 6-star at Nth"
+def Prob_hit_at_Nth(Nth):
+	if Nth>0 and Nth<=100:
+		prob_hit_at_Nth = 1
+		# "in former (N-1)th gacha, you hit nothing"
+		for ith in range(1,Nth):
+			prob_hit_at_Nth *= (1-current_hit_prob(ith))
+		# "you hit 6-star at Nth"
+		prob_hit_at_Nth *= current_hit_prob(Nth)
+		return prob_hit_at_Nth
+	else:
+		print('ERROR, an invalid input.')
+
+
+# this is the process how they get value "34"
+def how_to_get_34():
+	expected = 0
+	sum_expected = 0
+	for ith in range(1,100):
+		expected += ith * Prob_hit_at_Nth(ith)
+		sum_expected += Prob_hit_at_Nth(ith)
+	print("total prob of hitting in 100: ", sum_expected)
+	print("the expected value: ", expected)
+
+how_to_get_34()
+``` 
+
+
+
+People like to say "I have 170 gacha chances, and since the **expected gacha times for a 6-star is 34**, I might get 5 6-star characters!" I disagree with this, I believe with 170 chances, the expected 6-star should be around 3, not 5. We should use 50 as our expected time for getting a 6-star rather than 34.
+
+
+
+
+# 关于这个是干嘛的
  
 大家好，我今天想和大家聊一下 **“在粥里抽到一个6星的期望是多少抽”** 这个问题。
 
