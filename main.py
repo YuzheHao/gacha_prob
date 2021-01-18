@@ -24,4 +24,6 @@ if __name__ == '__main__':
 	amiya.magic_draw(values,
 					 x=keys,
 					 x_label="hit at #",
-					 y_label="# of people")
+					 y_label="# of people",
+					 legend=['plain model','relu model'],
+					 title='experiment: until_hit')
